@@ -5,25 +5,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class MerchandiseTest {
+class CommonMerchandiseTest {
 
   @Test
   void recalculateForNextDay_ShouldSeeSellInAndQualityDecreaseBy1_WhenSellInAndQualityGreaterThan1() {
     // Arrange
-    Merchandise merchandise = Merchandise.builder().name("test").sellIn(8).quality(8).build();
+    IMerchandise merchandise = CommonMerchandise.builder().name("test").sellIn(8).quality(8).build();
 
     // Act
     merchandise.recalculateForNextDay();
 
     // Assert
-    assertEquals(merchandise.getSellIn() - 1, merchandise.getSellIn());
-    assertEquals(merchandise.getQuality() - 1, merchandise.getQuality());
+    assertEquals(7, merchandise.getSellIn());
+    assertEquals(7, merchandise.getQuality());
   }
 
   @Test
   void recalculateForNextDay_ShouldSeeQualityStayAt0_WhenRecalculateAgainAfterQualityReaches0() {
     // Arrange
-    Merchandise merchandise = Merchandise.builder().name("test").sellIn(2).quality(1).build();
+    IMerchandise merchandise = CommonMerchandise.builder().name("test").sellIn(2).quality(1).build();
 
     // Act
     merchandise.recalculateForNextDay();
@@ -37,7 +37,7 @@ public class MerchandiseTest {
   @Test
   void recalculateForNextDay_ShouldSeeQualityDecreaseBy2_WhenAfterSellInReaches0() {
     // Arrange
-    Merchandise merchandise = Merchandise.builder().name("test").sellIn(1).quality(5).build();
+    IMerchandise merchandise = CommonMerchandise.builder().name("test").sellIn(1).quality(5).build();
 
     // Act
     merchandise.recalculateForNextDay();
