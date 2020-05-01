@@ -11,12 +11,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AgedBrie implements IMerchandise {
 
-  private String name;
   private int sellIn;
   private int quality;
 
   @Override
   public void recalculateForNextDay() {
     quality = Math.min(MAX_QUALITY, quality + 1);
+  }
+
+  @Override
+  public String getName() {
+    return this.getClass().getSimpleName();
   }
 }

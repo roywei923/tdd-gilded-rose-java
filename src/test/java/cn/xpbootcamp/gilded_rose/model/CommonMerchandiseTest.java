@@ -3,6 +3,7 @@ package cn.xpbootcamp.gilded_rose.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class CommonMerchandiseTest {
@@ -46,5 +47,19 @@ class CommonMerchandiseTest {
     // Assert
     assertEquals(-1, merchandise.getSellIn());
     assertEquals(2, merchandise.getQuality());
+  }
+
+  @Test
+  void recalculateForNextDay_ShouldGetCorrectName() {
+    // Arrange
+    String expected = UUID.randomUUID().toString();
+    IMerchandise merchandise = CommonMerchandise.builder().name(expected).sellIn(1).quality(5).build();
+
+    // Act
+    merchandise.recalculateForNextDay();
+    merchandise.recalculateForNextDay();
+
+    // Assert
+    assertEquals(expected, merchandise.getName());
   }
 }

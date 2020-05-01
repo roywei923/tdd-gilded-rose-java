@@ -9,7 +9,7 @@ class BackstagePassTest {
   @Test
   void recalculateForNextDay_ShouldSeeQualityIncrease2AndSellInDecrease1_WhenMoreThan10DaysBeforePerformance() {
     // Arrange
-    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(15).quality(10).build();
+    IMerchandise merchandise = BackstagePass.builder().sellIn(15).quality(10).build();
 
     // Act
     merchandise.recalculateForNextDay();
@@ -17,12 +17,13 @@ class BackstagePassTest {
     // Assert
     assertEquals(14, merchandise.getSellIn());
     assertEquals(11, merchandise.getQuality());
+    assertEquals("BackstagePass", merchandise.getName());
   }
 
   @Test
   void recalculateForNextDay_ShouldSeeQualityIncrease2AndSellInDecrease1_When10DaysBeforePerformance() {
     // Arrange
-    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(10).quality(0).build();
+    IMerchandise merchandise = BackstagePass.builder().sellIn(10).quality(0).build();
 
     // Act
     merchandise.recalculateForNextDay();
@@ -35,7 +36,7 @@ class BackstagePassTest {
   @Test
   void recalculateForNextDay_ShouldSeeQualityIncrease3AndSellInDecrease1_When5DaysBeforePerformance() {
     // Arrange
-    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(5).quality(0).build();
+    IMerchandise merchandise = BackstagePass.builder().sellIn(5).quality(0).build();
 
     // Act
     merchandise.recalculateForNextDay();
@@ -48,7 +49,7 @@ class BackstagePassTest {
   @Test
   void recalculateForNextDay_ShouldSeeQualityCapAt50AndSellInDecrease10_WhenOnThePerformanceDay() {
     // Arrange
-    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(40).quality(0).build();
+    IMerchandise merchandise = BackstagePass.builder().sellIn(40).quality(0).build();
 
     // Act
     for(int i = 0 ; i < 40; i++) {
@@ -63,7 +64,7 @@ class BackstagePassTest {
   @Test
   void recalculateForNextDay_ShouldSeeQualityDropTo0_WhenAfterThePerformanceDay() {
     // Arrange
-    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(0).quality(50).build();
+    IMerchandise merchandise = BackstagePass.builder().sellIn(0).quality(50).build();
 
     // Act
       merchandise.recalculateForNextDay();
@@ -76,7 +77,7 @@ class BackstagePassTest {
   @Test
   void recalculateForNextDay_ShouldSeeQualityStay0_When2DaysAfterThePerformanceDay() {
     // Arrange
-    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(-1).quality(0).build();
+    IMerchandise merchandise = BackstagePass.builder().sellIn(-1).quality(0).build();
 
     // Act
     merchandise.recalculateForNextDay();

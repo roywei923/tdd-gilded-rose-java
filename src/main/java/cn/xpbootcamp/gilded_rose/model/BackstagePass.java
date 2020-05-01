@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BackstagePass implements IMerchandise {
 
-  private String name;
   private int sellIn;
   private int quality;
 
@@ -30,4 +29,8 @@ public class BackstagePass implements IMerchandise {
     }
   }
 
+  @Override
+  public String getName() {
+    return this.getClass().getSimpleName();
+  }
 }
