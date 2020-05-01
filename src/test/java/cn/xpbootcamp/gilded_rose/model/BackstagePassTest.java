@@ -60,4 +60,16 @@ class BackstagePassTest {
     assertEquals(0, merchandise.getQuality());
   }
 
+  @Test
+  void recalculateForNextDay_ShouldSeeQualityStay0_When2DaysAfterThePerformanceDay() {
+    // Arrange
+    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(-1).quality(0).build();
+
+    // Act
+    merchandise.recalculateForNextDay();
+
+    // Assert
+    assertEquals(-2, merchandise.getSellIn());
+    assertEquals(0, merchandise.getQuality());
+  }
 }
