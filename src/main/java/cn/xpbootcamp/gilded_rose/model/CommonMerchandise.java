@@ -14,6 +14,6 @@ public class CommonMerchandise implements IMerchandise{
 
   public void recalculateForNextDay() {
     sellIn -= 1;
-    quality = Math.max(0, quality - (sellIn < 0 ? 2 : 1));
+    quality = Math.max(MIN_QUALITY, quality - (sellIn < 0 ? 2 : 1));
   }
 }

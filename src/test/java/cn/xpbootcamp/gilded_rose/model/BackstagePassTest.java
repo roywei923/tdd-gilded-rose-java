@@ -7,6 +7,19 @@ import org.junit.jupiter.api.Test;
 class BackstagePassTest {
 
   @Test
+  void recalculateForNextDay_ShouldSeeQualityIncrease2AndSellInDecrease1_WhenMoreThan10DaysBeforePerformance() {
+    // Arrange
+    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(15).quality(10).build();
+
+    // Act
+    merchandise.recalculateForNextDay();
+
+    // Assert
+    assertEquals(14, merchandise.getSellIn());
+    assertEquals(11, merchandise.getQuality());
+  }
+
+  @Test
   void recalculateForNextDay_ShouldSeeQualityIncrease2AndSellInDecrease1_When10DaysBeforePerformance() {
     // Arrange
     IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(10).quality(0).build();
@@ -33,18 +46,18 @@ class BackstagePassTest {
   }
 
   @Test
-  void recalculateForNextDay_ShouldSeeQualityIncrease25AndSellInDecrease10_WhenOnThePerformanceDay() {
+  void recalculateForNextDay_ShouldSeeQualityCapAt50AndSellInDecrease10_WhenOnThePerformanceDay() {
     // Arrange
-    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(10).quality(0).build();
+    IMerchandise merchandise = BackstagePass.builder().name("test").sellIn(40).quality(0).build();
 
     // Act
-    for(int i = 0 ; i < 10; i++) {
+    for(int i = 0 ; i < 40; i++) {
       merchandise.recalculateForNextDay();
     }
 
     // Assert
     assertEquals(0, merchandise.getSellIn());
-    assertEquals(25, merchandise.getQuality());
+    assertEquals(IMerchandise.MAX_QUALITY, merchandise.getQuality());
   }
 
   @Test
@@ -57,7 +70,7 @@ class BackstagePassTest {
 
     // Assert
     assertEquals(-1, merchandise.getSellIn());
-    assertEquals(0, merchandise.getQuality());
+    assertEquals(IMerchandise.MIN_QUALITY, merchandise.getQuality());
   }
 
   @Test
@@ -70,6 +83,6 @@ class BackstagePassTest {
 
     // Assert
     assertEquals(-2, merchandise.getSellIn());
-    assertEquals(0, merchandise.getQuality());
+    assertEquals(IMerchandise.MIN_QUALITY, merchandise.getQuality());
   }
 }

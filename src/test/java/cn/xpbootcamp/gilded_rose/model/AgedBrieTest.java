@@ -29,6 +29,6 @@ class AgedBrieTest {
 
     // Assert
     assertEquals(8, merchandise.getSellIn());
-    assertEquals(50, merchandise.getQuality());
+    assertEquals(IMerchandise.MAX_QUALITY, merchandise.getQuality());
   }
 }

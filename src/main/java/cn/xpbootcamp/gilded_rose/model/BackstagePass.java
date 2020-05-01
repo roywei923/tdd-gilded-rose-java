@@ -18,14 +18,16 @@ public class BackstagePass implements IMerchandise {
 
   @Override
   public void recalculateForNextDay() {
+    quality++;
     if (sellIn <= 10) {
-      if(sellIn > 5) {
-        quality += 2;
-      } else {
-        quality += sellIn > 0 ? 3 : -quality;
-      }
+      quality += sellIn > 5 ? 1 : 2;
     }
+    quality = Math.min(quality, MAX_QUALITY);
+
     sellIn--;
+    if(sellIn < 0 && quality > 0) {
+      quality = MIN_QUALITY;
+    }
   }
 
 }

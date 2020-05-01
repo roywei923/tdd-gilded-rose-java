@@ -17,6 +17,6 @@ public class AgedBrie implements IMerchandise {
 
   @Override
   public void recalculateForNextDay() {
-    quality = Math.min(50, quality + 1);
+    quality = Math.min(MAX_QUALITY, quality + 1);
   }
 }

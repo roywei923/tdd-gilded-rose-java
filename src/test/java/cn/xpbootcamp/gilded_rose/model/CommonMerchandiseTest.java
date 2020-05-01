@@ -31,7 +31,7 @@ class CommonMerchandiseTest {
 
     // Assert
     assertEquals(0, merchandise.getSellIn());
-    assertEquals(0, merchandise.getQuality());
+    assertEquals(IMerchandise.MIN_QUALITY, merchandise.getQuality());
   }
 
   @Test
