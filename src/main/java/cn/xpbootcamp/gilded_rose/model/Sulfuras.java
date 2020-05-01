@@ -12,12 +12,15 @@ import lombok.NoArgsConstructor;
 public class Sulfuras implements IMerchandise {
 
   private String name;
-  private int sellIn;
   private int quality;
 
   @Override
   public void recalculateForNextDay() {
-
+    // No action needed as Sulfuras's quality is constant
   }
 
+  @Override
+  public int getSellIn() {
+    return Integer.MAX_VALUE;
+  }
 }
