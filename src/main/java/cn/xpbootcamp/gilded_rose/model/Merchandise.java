@@ -12,4 +12,7 @@ public class Merchandise {
   private int sellIn;
   private int quality;
 
+  public void recalculateForNextDay() {
+
+  }
 }
